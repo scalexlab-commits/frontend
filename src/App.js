@@ -1,40 +1,66 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Login from './components/Login';
 import Registration from './components/Registration';
-import './App.css';
+import Home from './components/Home';
+import './assets/css/common.css';
+import './assets/css/App.css';
+import MarketPlace from './components/customer/MarketPlace.jsx';
+import Bids from './components/customer/Bids.jsx';
+import Orders from './components/customer/Orders.jsx';
+import logo from './assets/images/logo.png';
+import NotificationWidget from './components/NotificationWidget';
+
+function AppContent() {
+  const location = useLocation();
+  const showMarketNav = /^\/(market|bids|orders)(\/.*)?$/.test(location.pathname);
+
+  return (
+    <div className="App">
+      <nav className="navbar">
+        <div className="nav-container">
+          <div className="nav-logo-section">
+            {/* <img src={logo} alt="Logo" className="nav-logo-image" /> */}
+            <Link to="/" className="nav-logo">
+              Auction Bharat
+            </Link>
+          </div>
+          {showMarketNav ?
+            <div className='nav-menu'>
+              <Link to="/market" className="nav-link">Market Place</Link>
+              <Link to="/bids" className="nav-link">Bids</Link>
+              <Link to="/orders" className="nav-link">Orders</Link>
+            </div> : null}
+          {!showMarketNav ?
+            <div className="nav-menu">
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/registration" className="nav-link">Register</Link>
+            </div> :
+            <div className="nav-menu">
+              <Link to="/login" className="nav-link">Profile</Link>
+              {/* <Link to="/registration" className="nav-link">Register</Link> */}
+            </div>
+          }
+
+        </div>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/market" element={<MarketPlace />} />
+        <Route path="/bids" element={<Bids />} />
+        <Route path="/orders" element={<Orders />} />
+      </Routes>
+      <NotificationWidget />
+    </div>
+  );
+}
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <nav className="navbar">
-          <div className="nav-container">
-            <Link to="/" className="nav-logo">
-              Auction Bharat
-            </Link>
-            <div className="nav-menu">
-              <Link to="/login" className="nav-link">Login</Link>
-              <Link to="/registration" className="nav-link">Register</Link>
-            </div>
-          </div>
-        </nav>
-        
-        <Routes>
-          <Route path="/" element={
-            <div className="home">
-              <h1>Welcome to Auction Bharat</h1>
-              <p>Your premier online auction platform</p>
-              <div className="home-buttons">
-                <Link to="/login" className="btn btn-primary">Login</Link>
-                <Link to="/registration" className="btn btn-secondary">Register</Link>
-              </div>
-            </div>
-          } />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registration" element={<Registration />} />
-        </Routes>
-      </div>
+      <AppContent />
     </Router>
   );
 }

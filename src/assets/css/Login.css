@@ -1,0 +1,268 @@
+/* Login Page Styles */
+.login-container {
+  /* min-height: 100vh; */
+  /* background-color: #f5f5f5; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 20px; */
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-wrapper {
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  width: 100%;
+  min-height: auto;
+  overflow: hidden;
+}
+
+/* Left Branding Section */
+.branding-section {
+  flex: 1;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+}
+
+.branding-content {
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.logo-container {
+  margin-bottom: 40px;
+}
+
+.logo {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.logo-b {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #ff6b35;
+  position: relative;
+  z-index: 2;
+}
+
+.brand-name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-primary-text);
+}
+
+.registration-prompt {
+  margin-top: 30px;
+}
+
+.registration-prompt p {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.register-link {
+  color: white;
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.register-link:hover {
+  opacity: 0.8;
+}
+
+/* Right Form Section */
+.form-section {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  background: white;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.login-form {
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  background: white;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-input::placeholder {
+  color: #999;
+}
+
+.login-button {
+  width: 100%;
+  padding: 15px 20px;
+  background: var(--color-bg);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  background: #e55a2b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 30px 0;
+  position: relative;
+}
+
+.divider::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.divider-text {
+  padding: 0 20px;
+  color: #666;
+  font-size: 0.9rem;
+  background: white;
+}
+
+.google-login-button {
+  width: 100%;
+  padding: 15px 20px;
+  background: white;
+  color: #333;
+  border: 1px solid var(--color-light-shadow);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.google-login-button:hover {
+  border-color: #4285f4;
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.1);
+  transform: translateY(-1px);
+}
+
+.google-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+    min-height: auto;
+  }
+  
+  .branding-section {
+    flex: none;
+    padding: 30px 20px;
+    min-height: 200px;
+  }
+  
+  .form-section {
+    flex: none;
+    padding: 40px 20px;
+  }
+  
+  .form-container {
+    max-width: 100%;
+  }
+  
+  .logo-b {
+    font-size: 3rem;
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+  }
+  
+  .form-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 10px;
+  }
+  
+  .branding-section {
+    padding: 20px 15px;
+  }
+  
+  .form-section {
+    padding: 30px 15px;
+  }
+  
+  .form-input,
+  .login-button,
+  .google-login-button {
+    padding: 12px 15px;
+  }
+}
