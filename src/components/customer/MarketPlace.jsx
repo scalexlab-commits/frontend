@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProductCard from './ProductCard';
+import AuctionCard from './AuctionCard';
 
 const MarketPlace = () => {
     const [activeTab, setActiveTab] = useState('all-products');
@@ -148,8 +149,45 @@ const MarketPlace = () => {
             {/* Content based on active tab */}
             {activeTab === 'auctions' && (
                 <div style={{ padding: '2rem 0' }}>
-                    <h3>Active Auctions</h3>
-                    <p>Browse items currently up for auction.</p>
+                    <div style={{ 
+                        display: 'flex', 
+                        flexDirection: 'column',
+                        gap: '1rem',
+                        alignItems: 'center'
+                    }}>
+                        <AuctionCard 
+                            title="Vintage Rolex Submariner Watch"
+                            description="Rare 1960s Rolex Submariner in excellent condition with original box and papers. A true collector's piece."
+                            currentBid="$12,500"
+                            timeLeft="2h 34m 18s"
+                            totalBids="47"
+                            bidIncrement="$500"
+                            imageUrl="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop"
+                            isLive={true}
+                        />
+                        
+                        <AuctionCard 
+                            title="Antique Omega Speedmaster"
+                            description="Classic 1970s Omega Speedmaster with original bracelet and documentation. Perfect for collectors."
+                            currentBid="$8,750"
+                            timeLeft="1h 15m 42s"
+                            totalBids="23"
+                            bidIncrement="$250"
+                            imageUrl="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=400&h=300&fit=crop"
+                            isLive={true}
+                        />
+                        
+                        <AuctionCard 
+                            title="Vintage Cartier Tank Watch"
+                            description="Elegant 1980s Cartier Tank in pristine condition. A timeless piece of horological history."
+                            currentBid="$6,200"
+                            timeLeft="3h 45m 12s"
+                            totalBids="31"
+                            bidIncrement="$200"
+                            imageUrl="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=300&fit=crop"
+                            isLive={true}
+                        />
+                    </div>
                 </div>
             )}
 
