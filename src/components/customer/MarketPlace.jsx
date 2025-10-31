@@ -63,16 +63,16 @@ const MarketPlace = () => {
                 position: 'sticky',
                 top: '80px',
                 zIndex: '100',
-                background: '#f5f5f5',
+                background: 'white',
                 borderRadius: '8px',
                 padding: '16px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                // boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
             }}>
                 {/* Left Side - All Products Text */}
-                {activeTab === 'all-products' && (
+                {/* {activeTab === 'all-products' ? (
                     <h2 style={{ 
                         margin: 0, 
                         fontSize: '1.5rem', 
@@ -81,7 +81,17 @@ const MarketPlace = () => {
                     }}>
                         All Products
                     </h2>
-                )}
+                ): (
+                    <h2 style={{ 
+                        margin: 0, 
+                        fontSize: '1.5rem', 
+                        color: '#333',
+                        fontWeight: '600'
+                    }}>
+                        All Auctions
+                    </h2>
+                )} */}
+                <span></span>
 
                 {/* Right Side - Search, Categories and Filters */}
                 <div style={{
@@ -94,10 +104,11 @@ const MarketPlace = () => {
                         type="text"
                         placeholder="Search"
                         style={{
-                            width: '200px',
+                            height:'5px',
+                            // width: '200px',
                             padding: '12px 16px',
-                            border: 'none',
-                            borderRadius: '6px',
+                            border: '1px solid #3A485A',
+                            borderRadius: '5px',
                             fontSize: '14px',
                             outline: 'none',
                             background: 'white'
@@ -107,17 +118,18 @@ const MarketPlace = () => {
                     {/* Categories Dropdown */}
                     <button
                         style={{
-                            padding: '12px 16px',
-                            border: 'none',
-                            borderRadius: '6px',
-                            background: 'white',
-                            color: '#333',
+                            padding: '6px 10px',
+                            // height:'20px',
+                            // border: 'none',
+                            borderRadius: '5px',
+                            background: '#3A485A',
+                            color: 'white',
                             fontSize: '14px',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
                             gap: '8px',
-                            minWidth: '120px'
+
                         }}
                     >
                         Categories
@@ -127,17 +139,16 @@ const MarketPlace = () => {
                     {/* Filters Dropdown */}
                     <button
                         style={{
-                            padding: '12px 16px',
-                            border: 'none',
-                            borderRadius: '6px',
-                            background: 'white',
-                            color: '#333',
+                            padding: '6px 10px',
+                            // border: 'none',
+                            borderRadius: '5px',
+                            background: '#3A485A',
+                            color: 'white',
                             fontSize: '14px',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
                             gap: '8px',
-                            minWidth: '100px'
                         }}
                     >
                         Filters
@@ -148,45 +159,173 @@ const MarketPlace = () => {
 
             {/* Content based on active tab */}
             {activeTab === 'auctions' && (
-                <div style={{ padding: '2rem 0' }}>
-                    <div style={{ 
-                        display: 'flex', 
-                        flexDirection: 'column',
-                        gap: '1rem',
-                        alignItems: 'center'
-                    }}>
-                        <AuctionCard 
-                            title="Vintage Rolex Submariner Watch"
-                            description="Rare 1960s Rolex Submariner in excellent condition with original box and papers. A true collector's piece."
-                            currentBid="$12,500"
-                            timeLeft="2h 34m 18s"
-                            totalBids="47"
-                            bidIncrement="$500"
-                            imageUrl="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop"
-                            isLive={true}
-                        />
-                        
-                        <AuctionCard 
-                            title="Antique Omega Speedmaster"
-                            description="Classic 1970s Omega Speedmaster with original bracelet and documentation. Perfect for collectors."
-                            currentBid="$8,750"
-                            timeLeft="1h 15m 42s"
-                            totalBids="23"
-                            bidIncrement="$250"
-                            imageUrl="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=400&h=300&fit=crop"
-                            isLive={true}
-                        />
-                        
-                        <AuctionCard 
-                            title="Vintage Cartier Tank Watch"
-                            description="Elegant 1980s Cartier Tank in pristine condition. A timeless piece of horological history."
-                            currentBid="$6,200"
-                            timeLeft="3h 45m 12s"
-                            totalBids="31"
-                            bidIncrement="$200"
-                            imageUrl="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=300&fit=crop"
-                            isLive={true}
-                        />
+                <div>
+                    {/* Live Auctions Section */}
+                    <div style={{ marginBottom: '3rem' }}>
+                        <h2 style={{
+                            // fontSize: '1.75rem',
+                            // fontWeight: '700',
+                            color: '#1F2937',
+                            // marginBottom: '1.5rem',
+                            // paddingBottom: '0.75rem',
+                            borderBottom: '2px solid #ff6b35'
+                        }}>
+                            Live Auctions
+                        </h2>
+                        <div style={{ 
+                            display: 'flex', 
+                            flexDirection: 'column',
+                            gap: '1.5rem',
+                            alignItems: 'center'
+                        }}>
+                            <AuctionCard 
+                                title="Vintage Rolex Submariner Watch"
+                                description="Rare 1960s Rolex Submariner in excellent condition with original box and papers. A true collector's piece."
+                                currentBid="$12,500"
+                                timeLeft="2h 34m 18s"
+                                totalBids="47"
+                                bidIncrement="$500"
+                                imageUrl="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop"
+                                isLive={true}
+                                isBidInitiated={false}
+                            />
+                            
+                            <AuctionCard 
+                                title="Antique Omega Speedmaster"
+                                description="Classic 1970s Omega Speedmaster with original bracelet and documentation. Perfect for collectors."
+                                currentBid="$8,750"
+                                timeLeft="1h 15m 42s"
+                                totalBids="23"
+                                bidIncrement="$250"
+                                imageUrl="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=400&h=300&fit=crop"
+                                isLive={true}
+                                isBidInitiated={true}
+                            />
+                            
+                            <AuctionCard 
+                                title="Vintage Cartier Tank Watch"
+                                description="Elegant 1980s Cartier Tank in pristine condition. A timeless piece of horological history."
+                                currentBid="$6,200"
+                                timeLeft="3h 45m 12s"
+                                totalBids="31"
+                                bidIncrement="$200"
+                                imageUrl="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=300&fit=crop"
+                                isLive={true}
+                                isBidInitiated={false}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Upcoming Auctions Section */}
+                    <div style={{ marginBottom: '3rem' }}>
+                        <h2 style={{
+                            fontSize: '1.75rem',
+                            fontWeight: '700',
+                            color: '#1F2937',
+                            marginBottom: '1.5rem',
+                            paddingBottom: '0.75rem',
+                            borderBottom: '2px solid #ff6b35'
+                        }}>
+                            Upcoming Auctions
+                        </h2>
+                        <div style={{ 
+                            display: 'flex', 
+                            flexDirection: 'column',
+                            gap: '1.5rem',
+                            alignItems: 'center'
+                        }}>
+                            <AuctionCard 
+                                title="Limited Edition Patek Philippe"
+                                description="Exclusive limited edition timepiece with original documentation and certificate of authenticity."
+                                currentBid="$25,000"
+                                timeLeft="5d 12h 30m"
+                                totalBids="0"
+                                bidIncrement="$1,000"
+                                imageUrl="https://images.unsplash.com/photo-1622434641406-a158123450f9?w=400&h=300&fit=crop"
+                                isLive={false}
+                                isBidInitiated={false}
+                            />
+                            
+                            <AuctionCard 
+                                title="Vintage Omega Seamaster 300"
+                                description="Rare dive watch from the 1950s in remarkable condition. Perfect for serious collectors."
+                                currentBid="$15,000"
+                                timeLeft="3d 8h 45m"
+                                totalBids="0"
+                                bidIncrement="$750"
+                                imageUrl="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&h=300&fit=crop"
+                                isLive={false}
+                                isBidInitiated={false}
+                            />
+                            
+                            <AuctionCard 
+                                title="Audemars Piguet Royal Oak"
+                                description="Iconic timepiece from the 1990s with original box and warranty papers. Highly sought after."
+                                currentBid="$30,000"
+                                timeLeft="7d 2h 15m"
+                                totalBids="0"
+                                bidIncrement="$1,500"
+                                imageUrl="https://images.unsplash.com/photo-1600298881974-6be191ceeda1?w=400&h=300&fit=crop"
+                                isLive={false}
+                                isBidInitiated={false}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Featured Auctions Section */}
+                    <div style={{ marginBottom: '3rem' }}>
+                        <h2 style={{
+                            fontSize: '1.75rem',
+                            fontWeight: '700',
+                            color: '#1F2937',
+                            marginBottom: '1.5rem',
+                            paddingBottom: '0.75rem',
+                            borderBottom: '2px solid #ff6b35'
+                        }}>
+                            Featured Auctions
+                        </h2>
+                        <div style={{ 
+                            display: 'flex', 
+                            flexDirection: 'column',
+                            gap: '1.5rem',
+                            alignItems: 'center'
+                        }}>
+                            <AuctionCard 
+                                title="Rare Vintage Rolex Daytona"
+                                description="Extremely rare Paul Newman Daytona from 1969. One of the most coveted watches in horological history."
+                                currentBid="$50,000"
+                                timeLeft="1d 6h 20m"
+                                totalBids="156"
+                                bidIncrement="$2,500"
+                                imageUrl="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop"
+                                isLive={true}
+                                isBidInitiated={true}
+                            />
+                            
+                            <AuctionCard 
+                                title="Jaeger-LeCoultre Reverso Tribute"
+                                description="Elegant reversible watch with exquisite craftsmanship. A masterpiece of Swiss watchmaking."
+                                currentBid="$18,500"
+                                timeLeft="4h 45m 30s"
+                                totalBids="89"
+                                bidIncrement="$1,000"
+                                imageUrl="https://images.unsplash.com/photo-1600298881974-6be191ceeda1?w=400&h=300&fit=crop"
+                                isLive={true}
+                                isBidInitiated={false}
+                            />
+                            
+                            <AuctionCard 
+                                title="Vintage Tudor Submariner"
+                                description="Classic dive watch from the 1970s with original bracelet and bezel. Excellent investment piece."
+                                currentBid="$9,750"
+                                timeLeft="6h 30m 15s"
+                                totalBids="42"
+                                bidIncrement="$500"
+                                imageUrl="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop"
+                                isLive={true}
+                                isBidInitiated={true}
+                            />
+                        </div>
                     </div>
                 </div>
             )}

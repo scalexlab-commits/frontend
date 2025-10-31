@@ -96,6 +96,28 @@
   /* font-weight: bold; */
   color: var(--color-primary-text);
   text-decoration: none;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ff6b35;
+}
+
+.nav-link.active {
+  color: #ff6b35;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #ff6b35;
+  border-radius: 2px;
 }
 
 

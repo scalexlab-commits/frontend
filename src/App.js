@@ -8,12 +8,14 @@ import './assets/css/App.css';
 import MarketPlace from './components/customer/MarketPlace.jsx';
 import Bids from './components/customer/Bids.jsx';
 import Orders from './components/customer/Orders.jsx';
+import ProductDetail from './components/customer/ProductDetail.jsx';
 import logo from './assets/images/logo.png';
 import NotificationWidget from './components/NotificationWidget';
+import RegistrationForm from './components/RegistrationForm.jsx';
 
 function AppContent() {
   const location = useLocation();
-  const showMarketNav = /^\/(market|bids|orders)(\/.*)?$/.test(location.pathname);
+  const showMarketNav = /^\/(market|bids|orders|profile|product)(\/.*)?$/.test(location.pathname);
 
   return (
     <div className="App">
@@ -27,9 +29,24 @@ function AppContent() {
           </div>
           {showMarketNav ?
             <div className='nav-menu'>
-              <Link to="/market" className="nav-link">Market Place</Link>
-              <Link to="/bids" className="nav-link">Bids</Link>
-              <Link to="/orders" className="nav-link">Orders</Link>
+              <Link 
+                to="/market" 
+                className={`nav-link ${location.pathname === '/market' ? 'active' : ''}`}
+              >
+                Market Place
+              </Link>
+              <Link 
+                to="/bids" 
+                className={`nav-link ${location.pathname === '/bids' ? 'active' : ''}`}
+              >
+                Bids
+              </Link>
+              <Link 
+                to="/orders" 
+                className={`nav-link ${location.pathname === '/orders' ? 'active' : ''}`}
+              >
+                Orders
+              </Link>
             </div> : null}
           {!showMarketNav ?
             <div className="nav-menu">
@@ -51,6 +68,8 @@ function AppContent() {
         <Route path="/market" element={<MarketPlace />} />
         <Route path="/bids" element={<Bids />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/profile" element={<RegistrationForm />} />
       </Routes>
       <NotificationWidget />
     </div>

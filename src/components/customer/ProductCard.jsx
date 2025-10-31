@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ 
   productName = "Nike Running Shoe",
@@ -6,12 +7,20 @@ const ProductCard = ({
   size = "UK10",
   color = "BLACK/WHITE",
   description = "High-quality running shoe with modern design",
-  imageUrl = "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop"
+  imageUrl = "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",
+  productId = null
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
+  };
+
+  const handleViewProduct = () => {
+    // Navigate to product detail page with product ID or product name as slug
+    const id = productId || productName.toLowerCase().replace(/\s+/g, '-');
+    navigate(`/product/${id}`);
   };
 
   return (
@@ -151,20 +160,22 @@ const ProductCard = ({
             </div>
           </div>
 
-          {/* Add to Cart Button */}
-          <button style={{
-            background: '#8B5CF6',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            padding: '10px 16px',
-            fontSize: '14px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            transition: 'background 0.2s ease'
-          }}
-          onMouseOver={(e) => e.target.style.background = '#7C3AED'}
-          onMouseOut={(e) => e.target.style.background = '#8B5CF6'}
+          {/* View Product Button */}
+          <button 
+            onClick={handleViewProduct}
+            style={{
+              background: '#8B5CF6',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              padding: '10px 16px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'background 0.2s ease'
+            }}
+            onMouseOver={(e) => e.target.style.background = '#7C3AED'}
+            onMouseOut={(e) => e.target.style.background = '#8B5CF6'}
           >
             View Product
           </button>

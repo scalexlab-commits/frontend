@@ -8,7 +8,8 @@ const AuctionCard = ({
   totalBids = "47",
   bidIncrement = "$500",
   imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop",
-  isLive = true
+  isLive = true,
+  isBidInitiated
 }) => {
   const [timeRemaining, setTimeRemaining] = useState(timeLeft);
 
@@ -30,7 +31,7 @@ const AuctionCard = ({
       boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
       overflow: 'hidden',
       margin: '16px',
-      maxWidth: '800px',
+      // maxWidth: '800px',
       width: '100%'
     }}>
       {/* Left Section - Image */}
@@ -63,7 +64,7 @@ const AuctionCard = ({
             fontSize: '12px',
             fontWeight: '600'
           }}>
-            Live Auction
+            Auctions
           </div>
         )}
       </div>
@@ -212,6 +213,8 @@ const AuctionCard = ({
           display: 'flex',
           gap: '12px'
         }}>
+          {isBidInitiated ? 
+          <>
           <button
             onClick={handleBidUp}
             style={{
@@ -236,7 +239,6 @@ const AuctionCard = ({
             <span style={{ fontSize: '16px' }}>↑</span>
             Bid Up
           </button>
-
           <button
             onClick={handleBidOut}
             style={{
@@ -261,6 +263,33 @@ const AuctionCard = ({
             <span style={{ fontSize: '16px' }}>✕</span>
             Bid Out
           </button>
+          </>
+          :
+          <button
+            onClick={() => console.log('Start Bidding clicked')}
+            style={{
+              // flex: 1,
+              background: '#0dbf10ff',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '12px 16px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              transition: 'background 0.2s ease'
+            }}
+            // onMouseOver={(e) => e.target.style.background = '#22f337ff'}
+            // onMouseOut={(e) => e.target.style.background = '#EF4444'}
+          >
+            <span style={{ fontSize: '16px' }}></span>
+            Start Bidding
+          </button> }
+
         </div>
       </div>
     </div>
