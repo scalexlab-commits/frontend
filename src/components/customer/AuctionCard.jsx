@@ -218,7 +218,7 @@ const AuctionCard = ({
           <button
             onClick={handleBidUp}
             style={{
-              flex: 1,
+              width: '120px',
               background: '#3B82F6',
               color: 'white',
               border: 'none',
@@ -242,7 +242,7 @@ const AuctionCard = ({
           <button
             onClick={handleBidOut}
             style={{
-              flex: 1,
+              width: '150px',
               background: '#EF4444',
               color: 'white',
               border: 'none',
@@ -261,7 +261,7 @@ const AuctionCard = ({
             onMouseOut={(e) => e.target.style.background = '#EF4444'}
           >
             <span style={{ fontSize: '16px' }}>✕</span>
-            Bid Out
+            Auto Bid Up
           </button>
           </>
           :

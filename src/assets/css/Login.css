@@ -61,6 +61,10 @@
 }
 
 .registration-prompt {
+  margin-left: 25px;
+  display: flex;
+  gap: 10px;
+  color: var(--color-primary-text);
   margin-top: 30px;
 }
 
@@ -71,7 +75,7 @@
 }
 
 .register-link {
-  color: white;
+  /* color: yellow; */
   text-decoration: underline;
   font-weight: 600;
   font-size: 1rem;

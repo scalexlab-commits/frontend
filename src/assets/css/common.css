@@ -663,3 +663,618 @@
             flex-direction: column;
         }
     }
+
+    /* ============================================
+       Toast Message Component Styles
+       ============================================ */
+
+    /* Toast message wrapper - positioned at center top of screen */
+    .toast-wrapper {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        /* width: 100%; */
+        max-width: 600px;
+        padding: 0 16px;
+        pointer-events: none;
+    }
+
+    /* Main toast message container */
+    .toast-message {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 5px;
+        padding: 12px 16px;
+        /* min-height: 48px; */
+        /* width: 100%; */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        position: relative;
+        pointer-events: auto;
+    }
+
+    /* Toast message content container (icon + text) */
+    .toast-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+    }
+
+    /* Icon circle container */
+    .toast-icon-circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border-width: 2px;
+        border-style: solid;
+    }
+
+    /* Icon text inside circle */
+    .toast-icon-text {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 1;
+    }
+
+    /* Toast message text */
+    .toast-message-text {
+        font-size: 14px;
+        font-weight: 400;
+        flex: 1;
+    }
+
+    /* Toast action buttons container */
+    .toast-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-left: 16px;
+    }
+
+    /* Expand/collapse button */
+    .toast-expand-btn {
+        background: transparent;
+        border: none;
+        color: #9ca3af;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease;
+    }
+
+    .toast-expand-btn:hover {
+        color: #d1d5db;
+    }
+
+    .toast-expand-icon {
+        transition: transform 0.2s ease;
+    }
+
+    .toast-expand-icon.expanded {
+        transform: rotate(180deg);
+    }
+
+    /* Close button - same background as toast */
+    .toast-close-btn {
+        background: inherit; /* Same as toast background */
+        border: none;
+        color: #9ca3af;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        width: 20px;
+        height: 20px;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .toast-close-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #d1d5db;
+    }
+
+    /* SVG icon styles */
+    .toast-expand-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .toast-close-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .toast-close-icon path {
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* Expanded content section */
+    .toast-expanded-content {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        border-radius: 0 0 5px 5px;
+        padding: 12px 16px;
+        margin-top: 4px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    /* Error type styles */
+    .toast-error {
+        background: #1a4d4d; /* Dark teal/greenish-black */
+        color: #fff;
+    }
+
+    .toast-error .toast-icon-circle {
+        background: #fff;
+        border-color: #ef4444;
+    }
+
+    .toast-error .toast-icon-text {
+        color: #ef4444;
+    }
+
+    /* Success type styles */
+    .toast-success {
+        background: #064e3b;
+        color: #fff;
+    }
+
+    .toast-success .toast-icon-circle {
+        background: #fff;
+        border-color: #10b981;
+    }
+
+    .toast-success .toast-icon-text {
+        color: #10b981;
+    }
+
+    /* Warning type styles */
+    .toast-warning {
+        background: #78350f;
+        color: #fff;
+    }
+
+    .toast-warning .toast-icon-circle {
+        background: #fff;
+        border-color: #f59e0b;
+    }
+
+    .toast-warning .toast-icon-text {
+        color: #f59e0b;
+    }
+
+    /* Info type styles */
+    .toast-info {
+        background: #1e3a8a;
+        color: #fff;
+    }
+
+    .toast-info .toast-icon-circle {
+        background: #fff;
+        border-color: #3b82f6;
+    }
+
+    .toast-info .toast-icon-text {
+        color: #3b82f6;
+    }
+
+    .Seller{
+        border: none;
+        text-decoration: none;
+        background-color: #ff6b35;
+        border-radius: 5px;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .Seller:hover{
+        border: 1px solid #ff6b35;
+        background-color: white;
+        color: #ff6b35;
+    }
+
+    /* Seller Settings Layout */
+    .seller-settings-container {
+        display: flex;
+        min-height: calc(100vh - 60px); /* Adjust based on navbar height */
+        width: 100%;
+        background: #f5f5f5;
+    }
+
+    /* Left Sidebar */
+    .seller-sidebar {
+        width: 280px;
+        background: #ffffff;
+        border-right: 1px solid #e0e0e0;
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 60px; /* Navbar height */
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+
+    .seller-sidebar-header {
+        padding: 24px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        background: #fff;
+    }
+
+    .seller-sidebar-header h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .seller-sidebar-nav {
+        flex: 1;
+        padding: 16px 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .seller-nav-item {
+        width: 100%;
+        padding: 14px 20px;
+        text-align: left;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        color: #666;
+        transition: all 0.2s ease;
+        border-left: 3px solid transparent;
+        margin: 2px 0;
+    }
+
+    .seller-nav-item:hover {
+        background: #f8f9fa;
+        color: #333;
+    }
+
+    .seller-nav-item.active {
+        background: #fff5f2;
+        color: #ff6b35;
+        border-left-color: #ff6b35;
+        font-weight: 600;
+    }
+
+    /* Right Content Area */
+    .seller-content-area {
+        flex: 1;
+        padding: 32px;
+        overflow-y: auto;
+        background: #f5f5f5;
+    }
+
+    .seller-section-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #333;
+        margin: 0 0 24px 0;
+    }
+
+    /* Dashboard Styles */
+    .seller-dashboard-content,
+    .seller-profile-content,
+    .seller-add-product-content,
+    .seller-product-list-content {
+        background: #ffffff;
+        padding: 32px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        min-height: 400px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .seller-settings-container {
+            flex-direction: column;
+        }
+
+        .seller-sidebar {
+            width: 100%;
+            position: relative;
+            top: 0;
+            height: auto;
+            border-right: none;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .seller-sidebar-nav {
+            flex-direction: row;
+            overflow-x: auto;
+            padding: 8px 0;
+        }
+
+        .seller-nav-item {
+            min-width: 150px;
+            margin: 0 4px;
+            border-left: none;
+            border-bottom: 3px solid transparent;
+            padding: 12px 16px;
+        }
+
+        .seller-nav-item.active {
+            border-left: none;
+            border-bottom-color: #ff6b35;
+        }
+
+        .seller-content-area {
+            padding: 20px;
+        }
+    }
+
+    /* MarketPlace Product Grid - Responsive */
+    .marketplace-products-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        width: 100%;
+    }
+
+    /* Responsive breakpoints for product grid */
+    @media (max-width: 1200px) {
+        .marketplace-products-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .marketplace-products-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .marketplace-products-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+    }
+
+    /* ============================================
+       Auction Card Component Styles
+       ============================================ */
+
+    /* Main auction card container */
+    .auction-card {
+        display: flex;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        overflow: hidden;
+        margin: 16px;
+        width: 100%;
+    }
+
+    /* Left section - Image container */
+    .auction-card-image-section {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        background: #f8f9fa;
+    }
+
+    /* Auction card image */
+    .auction-card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Live auction badge */
+    .auction-card-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: #10B981;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    /* Right section - Details and actions */
+    .auction-card-details {
+        flex: 1;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Auction card title */
+    .auction-card-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1F2937;
+        margin: 0 0 12px 0;
+        line-height: 1.2;
+    }
+
+    /* Auction card description */
+    .auction-card-description {
+        font-size: 14px;
+        color: #6B7280;
+        line-height: 1.5;
+        margin: 0 0 20px 0;
+    }
+
+    /* Auction metrics grid */
+    .auction-card-metrics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    /* Metric item container */
+    .auction-card-metric-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Metric icon container - current bid (blue) */
+    .auction-card-metric-icon-blue {
+        width: 20px;
+        height: 20px;
+        background: #3B82F6;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    /* Metric icon container - default (gray) */
+    .auction-card-metric-icon {
+        width: 20px;
+        height: 20px;
+        background: #6B7280;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+    }
+
+    /* Metric label */
+    .auction-card-metric-label {
+        font-size: 12px;
+        color: #6B7280;
+        margin-bottom: 2px;
+    }
+
+    /* Metric value - blue (for current bid) */
+    .auction-card-metric-value-blue {
+        font-size: 18px;
+        font-weight: bold;
+        color: #3B82F6;
+    }
+
+    /* Metric value - default */
+    .auction-card-metric-value {
+        font-size: 18px;
+        font-weight: bold;
+        color: #1F2937;
+    }
+
+    /* Action buttons container */
+    .auction-card-actions {
+        display: flex;
+        gap: 12px;
+    }
+
+    /* Bid Up button */
+    .auction-card-btn-bid-up {
+        flex: 1;
+        background: #3B82F6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: background 0.2s ease;
+    }
+
+    .auction-card-btn-bid-up:hover {
+        background: #2563EB;
+    }
+
+    /* Bid Out button */
+    .auction-card-btn-bid-out {
+        flex: 1;
+        background: #EF4444;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: background 0.2s ease;
+    }
+
+    .auction-card-btn-bid-out:hover {
+        background: #DC2626;
+    }
+
+    /* Start Bidding button */
+    .auction-card-btn-start {
+        background: #0dbf10ff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: background 0.2s ease;
+    }
+
+    /* Button icon span */
+    .auction-card-btn-icon {
+        font-size: 16px;
+    }
+
+    /* Responsive design for auction card */
+    @media (max-width: 768px) {
+        .auction-card {
+            flex-direction: column;
+        }
+
+        .auction-card-image-section {
+            width: 100%;
+            height: 250px;
+        }
+
+        .auction-card-metrics {
+            grid-template-columns: 1fr;
+        }
+
+        .auction-card-actions {
+            flex-direction: column;
+        }
+    }

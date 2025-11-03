@@ -25,14 +25,25 @@ const ProductCard = ({
 
   return (
     <div style={{
-      width: '300px',
+      width: '100%',
       borderRadius: '12px',
       boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
       overflow: 'hidden',
       background: 'white',
-      margin: '16px',
-      position: 'relative'
-    }}>
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.transform = 'translateY(-4px)';
+      e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.15)';
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.transform = 'translateY(0)';
+      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+    }}
+    >
       {/* Top Section - Product Image */}
       <div style={{
         height: '200px',
@@ -85,7 +96,10 @@ const ProductCard = ({
       {/* Bottom Section - Product Details */}
       <div style={{
         padding: '20px',
-        background: 'white'
+        background: 'white',
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column'
       }}>
         {/* Product Name */}
         <h3 style={{
@@ -131,7 +145,8 @@ const ProductCard = ({
           fontSize: '14px',
           color: '#6B7280',
           lineHeight: '1.4',
-          margin: '0 0 16px 0'
+          margin: '0 0 16px 0',
+          flex: 1
         }}>
           {description}
         </p>
@@ -140,7 +155,8 @@ const ProductCard = ({
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          marginTop: 'auto'
         }}>
           {/* Price */}
           <div>

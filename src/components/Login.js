@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { post, setAuthToken } from './common/apiProvider';
 import '../assets/css/Login.css';
 import logo from '../assets/images/logo.png';
 
@@ -8,18 +9,48 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login form submitted:', formData);
-    // Add your login logic here
+    setLoading(true);
+    setError('');
+
+    try {
+      // Call the login API endpoint
+      const response = await post(`http://localhost:8080/api/login`, {
+        email: formData.email,
+        password: formData.password
+      });
+
+      // Check if login was successful
+      if (response.success && response.data) {
+        // Store the token using apiProvider
+        setAuthToken(response.data);
+        
+        // Redirect to market page
+        navigate('/market');
+      } else {
+        setError(response.message || 'Login failed. Please try again.');
+      }
+    } catch (err) {
+      // Handle API errors
+      console.error('Login error:', err);
+      setError(err.message || 'An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGoogleLogin = () => {
@@ -39,10 +70,6 @@ const Login = () => {
               </div>
               <h1 className="brand-name">Auction Bharath</h1>
             </div>
-            <div className="registration-prompt">
-              <p>Don't have an account?</p>
-              <Link to="/register" className="register-link">Register Now</Link>
-            </div>
           </div>
         </div>
 
@@ -52,6 +79,21 @@ const Login = () => {
             <h2 className="form-title">User login</h2>
             
             <form onSubmit={handleSubmit} className="login-form">
+              {/* Error Message */}
+              {error && (
+                <div style={{
+                  padding: '12px',
+                  background: '#fee',
+                  color: '#c33',
+                  borderRadius: '6px',
+                  marginBottom: '16px',
+                  fontSize: '14px',
+                  textAlign: 'center'
+                }}>
+                  {error}
+                </div>
+              )}
+
               <div className="input-group">
                 <input
                   type="email"
@@ -61,6 +103,7 @@ const Login = () => {
                   onChange={handleChange}
                   className="form-input"
                   required
+                  disabled={loading}
                 />
               </div>
               
@@ -73,11 +116,20 @@ const Login = () => {
                   onChange={handleChange}
                   className="form-input"
                   required
+                  disabled={loading}
                 />
               </div>
 
-              <button type="submit" className="login-button">
-                Login
+              <button 
+                type="submit" 
+                className="login-button"
+                disabled={loading}
+                style={{
+                  opacity: loading ? 0.6 : 1,
+                  cursor: loading ? 'not-allowed' : 'pointer'
+                }}
+              >
+                {loading ? 'Logging in...' : 'Login'}
               </button>
             </form>
 

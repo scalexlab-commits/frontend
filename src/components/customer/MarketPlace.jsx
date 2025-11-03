@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import ProductCard from './ProductCard';
 import AuctionCard from './AuctionCard';
+import '../../assets/css/common.css';
 
 const MarketPlace = () => {
     const [activeTab, setActiveTab] = useState('all-products');
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <div style={{ padding: '' }}>
             {/* Tab Buttons - Sticky */}
             <div style={{
                 position: 'sticky',
@@ -61,7 +62,7 @@ const MarketPlace = () => {
             {/* Search and Filter Bar - Sticky */}
             <div style={{
                 position: 'sticky',
-                top: '80px',
+                top: '70px',
                 zIndex: '100',
                 background: 'white',
                 borderRadius: '8px',
@@ -331,13 +332,13 @@ const MarketPlace = () => {
             )}
 
             {activeTab === 'all-products' && (
-                <div style={{ padding: '2rem 0' }}>
-                    <div style={{ 
-                        display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
-                        gap: '1rem',
-                        justifyContent: 'center'
-                    }}>
+                <div style={{ 
+                    padding: '2rem 1rem',
+                    // maxWidth: '1400px',
+                    margin: '0 auto',
+                    // width: '100%'
+                }}>
+                    <div className="marketplace-products-grid">
                         <ProductCard />
                         <ProductCard 
                             productName="Adidas Running Shoe"
@@ -352,6 +353,41 @@ const MarketPlace = () => {
                             size="EU39"
                             color="BLUE/WHITE"
                             description="Lightweight sports shoe perfect for daily activities and workouts."
+                        />
+                        <ProductCard 
+                            productName="Nike Air Max"
+                            price="$79.99"
+                            size="EU41"
+                            color="RED/BLACK"
+                            description="Premium athletic shoe with air cushioning technology."
+                        />
+                        <ProductCard 
+                            productName="Reebok Classic"
+                            price="$54.99"
+                            size="EU38"
+                            color="NAVY/WHITE"
+                            description="Classic retro style with modern comfort features."
+                        />
+                        <ProductCard 
+                            productName="New Balance 574"
+                            price="$64.99"
+                            size="EU42"
+                            color="GRAY/BLUE"
+                            description="Timeless design with superior arch support."
+                        />
+                        <ProductCard 
+                            productName="Vans Old Skool"
+                            price="$45.99"
+                            size="EU40"
+                            color="BLACK/WHITE"
+                            description="Iconic skate shoe with durable construction."
+                        />
+                        <ProductCard 
+                            productName="Converse Chuck Taylor"
+                            price="$50.99"
+                            size="EU39"
+                            color="WHITE/BLACK"
+                            description="Classic canvas sneaker, perfect for everyday wear."
                         />
                     </div>
                 </div>
