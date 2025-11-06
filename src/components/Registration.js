@@ -43,7 +43,7 @@ const Registration = () => {
 
     try {
       // Call the registration API endpoint - use relative path (API provider handles domain)
-       response = await post('http://localhost:8080/api/register', {
+       response = await post('/api/register', {
         email: formData.email,
         password: formData.password
       });

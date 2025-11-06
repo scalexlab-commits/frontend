@@ -29,7 +29,7 @@ const Login = () => {
 
     try {
       // Call the login API endpoint
-      const response = await post(`http://localhost:8080/api/login`, {
+      const response = await post(`/api/login`, {
         email: formData.email,
         password: formData.password
       });
