@@ -52,7 +52,7 @@ const Registration = () => {
       // Check if registration was successful
       if (response && response.success) {
         // Show success message
-        setToastMessage(response.data);
+        setToastMessage(response.data.message);
         setToastType('success');
         setShowToast(true);
         
@@ -63,7 +63,7 @@ const Registration = () => {
         
       } else if(response && response.success === false) {
         // Show error message from response
-        const errorMsg = response.error?.message || 'Registration failed. Please try again.';
+        const errorMsg = response.data?.message || 'Registration failed. Please try again.';
         console.log("errorMsg",errorMsg);
         setToastMessage(typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
         setToastType('error');

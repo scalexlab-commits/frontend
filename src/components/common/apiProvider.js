@@ -26,12 +26,8 @@
  *   const data = await get('/api/products', { headers: { 'Authorization': 'Bearer token' } });
  */
 
-// Base URL from environment variable
-// In development: use relative URLs (proxy handles CORS)
-// In production: use full URL from .env
-const API_BASE_URL = process.env.NODE_ENV === 'production'
-  ? (process.env.REACT_APP_API_BASE_URL || 'https://auctionbharath.com')
-  : ''; // Empty string = relative URL (uses proxy in development)
+// Base URL from environment variable - always use from .env file
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://auctionbharath.com';
 
 /**
  * Default configuration for API requests
@@ -62,15 +58,8 @@ const buildURL = (endpoint) => {
     return endpoint;
   }
   
-  // In development: use relative URL (proxy will handle it)
-  // In production: use full URL with domain from .env
-  if (API_BASE_URL === '') {
-    // Development mode - use relative URL (proxy handles CORS)
-    // Ensure endpoint starts with / for proper proxy routing
-    return endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  }
-  
-  // Production mode - build full URL
+  // Always use API_BASE_URL from .env file
+  // Ensure endpoint doesn't have leading slash when building URL
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
   return `${API_BASE_URL}/${cleanEndpoint}`;
 };
@@ -97,7 +86,15 @@ const buildConfig = (method, body = null, customConfig = {}) => {
 
   // Add body for POST, PUT, PATCH requests
   if (body) {
-    config.body = JSON.stringify(body);
+    // If body is FormData, don't stringify and don't set Content-Type
+    // Let the browser set it with the proper boundary
+    if (body instanceof FormData) {
+      config.body = body;
+      // Remove Content-Type header for FormData to let browser set it
+      delete config.headers['Content-Type'];
+    } else {
+      config.body = JSON.stringify(body);
+    }
   }
 
   return config;
@@ -105,37 +102,82 @@ const buildConfig = (method, body = null, customConfig = {}) => {
 
 /**
  * Handles API response
+ * Enhanced to handle various API response formats and preserve error data structure
  */
 const handleResponse = async (response) => {
+  // Try to parse response body first (for both success and error cases)
+  let responseData = null;
+  const contentType = response.headers.get('content-type');
+  
+  try {
+    if (contentType && contentType.includes('application/json')) {
+      responseData = await response.json();
+    } else {
+      responseData = await response.text();
+    }
+  } catch (parseError) {
+    // If parsing fails, use default error message
+    responseData = null;
+  }
+
   // Check if response is ok (status 200-299)
   if (!response.ok) {
     let errorMessage = 'An error occurred';
+    let errorData = null;
     
-    try {
-      const errorData = await response.json();
-      errorMessage = errorData.message || errorData.error || errorMessage;
-    } catch (e) {
-      // If response is not JSON, get text
-      try {
-        errorMessage = await response.text() || errorMessage;
-      } catch (textError) {
-        errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+    if (responseData) {
+      // Preserve the full error data structure
+      errorData = responseData;
+      
+      // Extract error message from various possible API response formats:
+      // 1. { data: { message: "error" } }
+      // 2. { message: "error" }
+      // 3. { error: "error message" }
+      // 4. { data: { error: "error message" } }
+      // 5. { success: false, data: { message: "error" } }
+      // 6. { errors: [...] } (validation errors)
+      
+      if (responseData.data?.message) {
+        errorMessage = responseData.data.message;
+      } else if (responseData.message) {
+        errorMessage = responseData.message;
+      } else if (responseData.data?.error) {
+        errorMessage = responseData.data.error;
+      } else if (responseData.error) {
+        errorMessage = typeof responseData.error === 'string' 
+          ? responseData.error 
+          : responseData.error?.message || JSON.stringify(responseData.error);
+      } else if (responseData.errors && Array.isArray(responseData.errors)) {
+        // Handle validation errors array
+        errorMessage = responseData.errors.map(err => 
+          typeof err === 'string' ? err : err.message || JSON.stringify(err)
+        ).join(', ');
+      } else if (typeof responseData === 'string') {
+        errorMessage = responseData;
+      } else {
+        // If no clear message, try to stringify the data
+        errorMessage = JSON.stringify(responseData);
       }
+    } else {
+      errorMessage = `HTTP ${response.status}: ${response.statusText}`;
     }
 
+    // Create error object with full error data attached
     const error = new Error(errorMessage);
     error.status = response.status;
     error.statusText = response.statusText;
+    error.data = errorData; // Attach full error data for component access
+    error.response = responseData; // Also attach as 'response' for compatibility
+    
     throw error;
   }
 
-  // Try to parse JSON, return text if not JSON
-  const contentType = response.headers.get('content-type');
-  if (contentType && contentType.includes('application/json')) {
-    return await response.json();
-  }
-  
-  return await response.text();
+  // Success response - return the parsed data
+  // The response might be in different formats:
+  // - Direct data: { token: "...", user: {...} }
+  // - Wrapped: { success: true, data: {...} }
+  // - Mixed: { success: true, message: "...", data: {...} }
+  return responseData;
 };
 
 /**

@@ -4,156 +4,51 @@ import AuctionCard from './AuctionCard';
 import '../../assets/css/common.css';
 
 const MarketPlace = () => {
-    const [activeTab, setActiveTab] = useState('all-products');
+    const [activeTab, setActiveTab] = useState('auctions');
+    const [searchQuery, setSearchQuery] = useState('');
 
     return (
-        <div style={{ padding: '' }}>
-            {/* Tab Buttons - Sticky */}
-            <div style={{
-                position: 'sticky',
-                top: '0',
-                zIndex: '101',
-                background: 'white',
-                padding: '1rem 0',
-                borderBottom: '1px solid #e5e7eb'
-            }}>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '0',
-                }}>
+        <div className="marketplace-container">
+            {/* Integrated Search Bar with Tabs - Sticky */}
+            <div className="marketplace-search-bar">
+                {/* Left Side - Tabs */}
+                <div className="marketplace-tabs">
                     <button
                         onClick={() => setActiveTab('auctions')}
-                        style={{
-                            padding: '12px 24px',
-                            border: '1px solid #ff6b35',
-                            borderRadius: '6px',
-                            background: activeTab === 'auctions' ? '#ff6b35' : 'white',
-                            color: activeTab === 'auctions' ? 'white' : '#ff6b35',
-                            cursor: 'pointer',
-                            fontSize: '14px',
-                            fontWeight: '500',
-                            transition: 'all 0.3s ease',
-                            marginRight: '8px'
-                        }}
+                        className={`marketplace-tab ${activeTab === 'auctions' ? 'active' : ''}`}
                     >
-                        Auctions
+                        Live Auctions
                     </button>
-
                     <button
                         onClick={() => setActiveTab('all-products')}
-                        style={{
-                            padding: '12px 24px',
-                            border: '1px solid #ff6b35',
-                            borderRadius: '6px',
-                            background: activeTab === 'all-products' ? '#ff6b35' : 'white',
-                            color: activeTab === 'all-products' ? 'white' : '#ff6b35',
-                            cursor: 'pointer',
-                            fontSize: '14px',
-                            fontWeight: '500',
-                            transition: 'all 0.3s ease'
-                        }}
+                        className={`marketplace-tab ${activeTab === 'all-products' ? 'active' : ''}`}
                     >
                         All Products
                     </button>
                 </div>
-            </div>
 
-            {/* Search and Filter Bar - Sticky */}
-            <div style={{
-                position: 'sticky',
-                top: '70px',
-                zIndex: '100',
-                background: 'white',
-                borderRadius: '8px',
-                padding: '16px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                // boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-            }}>
-                {/* Left Side - All Products Text */}
-                {/* {activeTab === 'all-products' ? (
-                    <h2 style={{ 
-                        margin: 0, 
-                        fontSize: '1.5rem', 
-                        color: '#333',
-                        fontWeight: '600'
-                    }}>
-                        All Products
-                    </h2>
-                ): (
-                    <h2 style={{ 
-                        margin: 0, 
-                        fontSize: '1.5rem', 
-                        color: '#333',
-                        fontWeight: '600'
-                    }}>
-                        All Auctions
-                    </h2>
-                )} */}
-                <span></span>
-
-                {/* Right Side - Search, Categories and Filters */}
-                <div style={{
-                    display: 'flex',
-                    gap: '12px',
-                    alignItems: 'center'
-                }}>
-                    {/* Search Input */}
+                {/* Middle - Search Input with Icon */}
+                <div className="marketplace-search-input-wrapper">
                     <input
                         type="text"
-                        placeholder="Search"
-                        style={{
-                            height:'5px',
-                            // width: '200px',
-                            padding: '12px 16px',
-                            border: '1px solid #3A485A',
-                            borderRadius: '5px',
-                            fontSize: '14px',
-                            outline: 'none',
-                            background: 'white'
-                        }}
+                        placeholder="Search..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="marketplace-search-input"
                     />
-                    
-                    {/* Categories Dropdown */}
-                    <button
-                        style={{
-                            padding: '6px 10px',
-                            // height:'20px',
-                            // border: 'none',
-                            borderRadius: '5px',
-                            background: '#3A485A',
-                            color: 'white',
-                            fontSize: '14px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
+                    <svg className="marketplace-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8" strokeWidth="2"/>
+                        <path d="m21 21-4.35-4.35" strokeWidth="2"/>
+                    </svg>
+                </div>
 
-                        }}
-                    >
-                        Categories
-                        <span style={{ fontSize: '12px' }}>▼</span>
-                    </button>
-
-                    {/* Filters Dropdown */}
-                    <button
-                        style={{
-                            padding: '6px 10px',
-                            // border: 'none',
-                            borderRadius: '5px',
-                            background: '#3A485A',
-                            color: 'white',
-                            fontSize: '14px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                        }}
-                    >
+                {/* Right Side - Filter Buttons */}
+                <div className="marketplace-filters">
+                    <button className="marketplace-filter-btn marketplace-filter-btn-primary">
                         Filters
-                        <span style={{ fontSize: '12px' }}>▼</span>
+                    </button>
+                    <button className="marketplace-filter-btn marketplace-filter-btn-secondary">
+                        Categories
                     </button>
                 </div>
             </div>
@@ -162,23 +57,11 @@ const MarketPlace = () => {
             {activeTab === 'auctions' && (
                 <div>
                     {/* Live Auctions Section */}
-                    <div style={{ marginBottom: '3rem' }}>
-                        <h2 style={{
-                            // fontSize: '1.75rem',
-                            // fontWeight: '700',
-                            color: '#1F2937',
-                            // marginBottom: '1.5rem',
-                            // paddingBottom: '0.75rem',
-                            borderBottom: '2px solid #ff6b35'
-                        }}>
+                    <div className="auction-section">
+                        <h2 className="auction-section-title">
                             Live Auctions
                         </h2>
-                        <div style={{ 
-                            display: 'flex', 
-                            flexDirection: 'column',
-                            gap: '1.5rem',
-                            alignItems: 'center'
-                        }}>
+                        <div className="auction-cards-container">
                             <AuctionCard 
                                 title="Vintage Rolex Submariner Watch"
                                 description="Rare 1960s Rolex Submariner in excellent condition with original box and papers. A true collector's piece."
@@ -218,23 +101,11 @@ const MarketPlace = () => {
                     </div>
 
                     {/* Upcoming Auctions Section */}
-                    <div style={{ marginBottom: '3rem' }}>
-                        <h2 style={{
-                            fontSize: '1.75rem',
-                            fontWeight: '700',
-                            color: '#1F2937',
-                            marginBottom: '1.5rem',
-                            paddingBottom: '0.75rem',
-                            borderBottom: '2px solid #ff6b35'
-                        }}>
+                    <div className="auction-section">
+                        <h2 className="auction-section-title">
                             Upcoming Auctions
                         </h2>
-                        <div style={{ 
-                            display: 'flex', 
-                            flexDirection: 'column',
-                            gap: '1.5rem',
-                            alignItems: 'center'
-                        }}>
+                        <div className="auction-cards-container">
                             <AuctionCard 
                                 title="Limited Edition Patek Philippe"
                                 description="Exclusive limited edition timepiece with original documentation and certificate of authenticity."
@@ -274,23 +145,11 @@ const MarketPlace = () => {
                     </div>
 
                     {/* Featured Auctions Section */}
-                    <div style={{ marginBottom: '3rem' }}>
-                        <h2 style={{
-                            fontSize: '1.75rem',
-                            fontWeight: '700',
-                            color: '#1F2937',
-                            marginBottom: '1.5rem',
-                            paddingBottom: '0.75rem',
-                            borderBottom: '2px solid #ff6b35'
-                        }}>
+                    <div className="auction-section">
+                        <h2 className="auction-section-title">
                             Featured Auctions
                         </h2>
-                        <div style={{ 
-                            display: 'flex', 
-                            flexDirection: 'column',
-                            gap: '1.5rem',
-                            alignItems: 'center'
-                        }}>
+                        <div className="auction-cards-container">
                             <AuctionCard 
                                 title="Rare Vintage Rolex Daytona"
                                 description="Extremely rare Paul Newman Daytona from 1969. One of the most coveted watches in horological history."
@@ -332,12 +191,7 @@ const MarketPlace = () => {
             )}
 
             {activeTab === 'all-products' && (
-                <div style={{ 
-                    padding: '2rem 1rem',
-                    // maxWidth: '1400px',
-                    margin: '0 auto',
-                    // width: '100%'
-                }}>
+                <div className="marketplace-products-container">
                     <div className="marketplace-products-grid">
                         <ProductCard />
                         <ProductCard 

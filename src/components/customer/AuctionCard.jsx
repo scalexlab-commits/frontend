@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../../assets/css/common.css';
 
 const AuctionCard = ({ 
   title = "Vintage Rolex Submariner Watch",
@@ -24,184 +25,93 @@ const AuctionCard = ({
   };
 
   return (
-    <div style={{
-      display: 'flex',
-      background: 'white',
-      borderRadius: '12px',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-      overflow: 'hidden',
-      margin: '16px',
-      // maxWidth: '800px',
-      width: '100%'
-    }}>
+    <div className="auction-card">
       {/* Left Section - Image */}
-      <div style={{
-        width: '300px',
-        height: '300px',
-        position: 'relative',
-        background: '#f8f9fa'
-      }}>
+      <div className="auction-card-image-section">
         <img 
           src={imageUrl} 
           alt={title}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }}
+          className="auction-card-image"
         />
         
         {/* Live Auction Badge */}
         {isLive && (
-          <div style={{
-            position: 'absolute',
-            top: '12px',
-            left: '12px',
-            background: '#10B981',
-            color: 'white',
-            padding: '6px 12px',
-            borderRadius: '20px',
-            fontSize: '12px',
-            fontWeight: '600'
-          }}>
+          <div className="auction-card-badge">
             Auctions
           </div>
         )}
       </div>
 
       {/* Right Section - Details and Actions */}
-      <div style={{
-        flex: 1,
-        padding: '24px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-      }}>
+      <div className="auction-card-details">
         {/* Title and Description */}
         <div>
-          <h3 style={{
-            fontSize: '24px',
-            fontWeight: 'bold',
-            color: '#1F2937',
-            margin: '0 0 12px 0',
-            lineHeight: '1.2'
-          }}>
+          <h3 className="auction-card-title">
             {title}
           </h3>
           
-          <p style={{
-            fontSize: '14px',
-            color: '#6B7280',
-            lineHeight: '1.5',
-            margin: '0 0 20px 0'
-          }}>
+          <p className="auction-card-description">
             {description}
           </p>
         </div>
 
         {/* Auction Metrics */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '16px',
-          marginBottom: '24px'
-        }}>
+        <div className="auction-card-metrics">
           {/* Current Bid */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{
-              width: '20px',
-              height: '20px',
-              background: '#3B82F6',
-              borderRadius: '4px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontSize: '12px',
-              fontWeight: 'bold'
-            }}>
+          <div className="auction-card-metric-item">
+            <div className="auction-card-metric-icon-blue">
               $
             </div>
             <div>
-              <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '2px' }}>
+              <div className="auction-card-metric-label">
                 Current Bid
               </div>
-              <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#3B82F6' }}>
+              <div className="auction-card-metric-value-blue">
                 {currentBid}
               </div>
             </div>
           </div>
 
           {/* Time Left */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{
-              width: '20px',
-              height: '20px',
-              background: '#6B7280',
-              borderRadius: '4px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontSize: '12px'
-            }}>
+          <div className="auction-card-metric-item">
+            <div className="auction-card-metric-icon">
               🕐
             </div>
             <div>
-              <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '2px' }}>
+              <div className="auction-card-metric-label">
                 Time Left
               </div>
-              <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#1F2937' }}>
+              <div className="auction-card-metric-value">
                 {timeRemaining}
               </div>
             </div>
           </div>
 
           {/* Total Bids */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{
-              width: '20px',
-              height: '20px',
-              background: '#6B7280',
-              borderRadius: '4px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontSize: '12px'
-            }}>
+          <div className="auction-card-metric-item">
+            <div className="auction-card-metric-icon">
               👥
             </div>
             <div>
-              <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '2px' }}>
+              <div className="auction-card-metric-label">
                 Total Bids
               </div>
-              <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#1F2937' }}>
+              <div className="auction-card-metric-value">
                 {totalBids}
               </div>
             </div>
           </div>
 
           {/* Bid Increment */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{
-              width: '20px',
-              height: '20px',
-              background: '#6B7280',
-              borderRadius: '4px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontSize: '12px'
-            }}>
+          <div className="auction-card-metric-item">
+            <div className="auction-card-metric-icon">
               📈
             </div>
             <div>
-              <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '2px' }}>
+              <div className="auction-card-metric-label">
                 Bid Increment
               </div>
-              <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#1F2937' }}>
+              <div className="auction-card-metric-value">
                 {bidIncrement}
               </div>
             </div>
@@ -209,84 +119,30 @@ const AuctionCard = ({
         </div>
 
         {/* Action Buttons */}
-        <div style={{
-          display: 'flex',
-          gap: '12px'
-        }}>
+        <div className="auction-card-actions">
           {isBidInitiated ? 
           <>
           <button
             onClick={handleBidUp}
-            style={{
-              width: '120px',
-              background: '#3B82F6',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '12px 16px',
-              fontSize: '14px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              transition: 'background 0.2s ease'
-            }}
-            onMouseOver={(e) => e.target.style.background = '#2563EB'}
-            onMouseOut={(e) => e.target.style.background = '#3B82F6'}
+            className="auction-card-btn-bid-up"
           >
-            <span style={{ fontSize: '16px' }}>↑</span>
+            <span className="auction-card-btn-icon">↑</span>
             Bid Up
           </button>
           <button
             onClick={handleBidOut}
-            style={{
-              width: '150px',
-              background: '#EF4444',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '12px 16px',
-              fontSize: '14px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              transition: 'background 0.2s ease'
-            }}
-            onMouseOver={(e) => e.target.style.background = '#DC2626'}
-            onMouseOut={(e) => e.target.style.background = '#EF4444'}
+            className="auction-card-btn-bid-out"
           >
-            <span style={{ fontSize: '16px' }}>✕</span>
+            <span className="auction-card-btn-icon">✕</span>
             Auto Bid Up
           </button>
           </>
           :
           <button
             onClick={() => console.log('Start Bidding clicked')}
-            style={{
-              // flex: 1,
-              background: '#0dbf10ff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '12px 16px',
-              fontSize: '14px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              transition: 'background 0.2s ease'
-            }}
-            // onMouseOver={(e) => e.target.style.background = '#22f337ff'}
-            // onMouseOut={(e) => e.target.style.background = '#EF4444'}
+            className="auction-card-btn-start"
           >
-            <span style={{ fontSize: '16px' }}></span>
+            <span className="auction-card-btn-icon"></span>
             Start Bidding
           </button> }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { post, setAuthToken } from './common/apiProvider';
+import { post, get, setAuthToken } from './common/apiProvider';
 import '../assets/css/Login.css';
 import logo from '../assets/images/logo.png';
 
@@ -35,14 +35,32 @@ const Login = () => {
       });
 
       // Check if login was successful
-      if (response.success && response.data) {
+      if (response.success) {
         // Store the token using apiProvider
-        setAuthToken(response.data);
+        setAuthToken(response.data.token);
+        
+        // Call seller API to get seller data
+        try {
+          const sellerResponse = await get('/api/seller');
+          
+          // Store seller data in localStorage with key 'isSeller'
+          if (sellerResponse.success && sellerResponse.data) {
+            localStorage.setItem('isSeller', JSON.stringify(sellerResponse.data.isSeller));
+            localStorage.setItem('isSellerType', sellerResponse.data.sellerDetaisl.listing_type);
+          } else {
+            // If no seller data, store false or empty
+            localStorage.setItem('isSeller', JSON.stringify(false));
+          }
+        } catch (sellerErr) {
+          // If seller API fails, store false (user is not a seller or API error)
+          console.error('Seller API error:', sellerErr);
+          localStorage.setItem('isSeller', JSON.stringify(false));
+        }
         
         // Redirect to market page
         navigate('/market');
       } else {
-        setError(response.message || 'Login failed. Please try again.');
+        setError(response.data.message || 'Login failed. Please try again.');
       }
     } catch (err) {
       // Handle API errors
