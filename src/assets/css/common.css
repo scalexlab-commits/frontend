@@ -1576,6 +1576,7 @@
 
     /* Start Bidding button */
     .auction-card-btn-start {
+        flex: 50%;
         background: #0dbf10ff;
         color: white;
         border: none;

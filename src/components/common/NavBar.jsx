@@ -1,13 +1,14 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import ProfileDropdown from './ProfileDropdown';
 
 const NavBar = () => {
     const location = useLocation()
     const token = localStorage.getItem('authToken');
 
     const showMarketNav = /^\/(market|bids|orders|profile|product|Seller-registration)(\/.*)?$/.test(location.pathname);
-;
     const isSeller = JSON.parse(localStorage.getItem('isSeller'));
+
     return (
         <div>
             <nav className="navbar">
@@ -47,10 +48,8 @@ const NavBar = () => {
                             <Link to="/registration" className="nav-link">Register</Link>
                         </div> :
                         <div className="nav-menu">
-                            <Link to="" className="nav-link">Profile</Link>
+                            <ProfileDropdown />
                             {isSeller ? <Link to="/SellerSettings" className='Seller' >Seller Settings</Link> : <Link to="Seller-registration" className='Seller'>Become Seller</Link>}
-
-                            {/* <Link to="/registration" className="nav-link">Register</Link> */}
                         </div>
                     }
 

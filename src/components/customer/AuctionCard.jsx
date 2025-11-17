@@ -138,13 +138,22 @@ const AuctionCard = ({
           </button>
           </>
           :
+          <>
           <button
             onClick={() => console.log('Start Bidding clicked')}
             className="auction-card-btn-start"
           >
             <span className="auction-card-btn-icon"></span>
             Start Bidding
-          </button> }
+          </button> 
+          {/* <button
+            onClick={() => console.log('Start Bidding clicked')}
+            className="auction-card-btn-start"
+          >
+            <span className="auction-card-btn-icon"></span>
+            
+          </button> */}
+          </> }
 
         </div>
       </div>
